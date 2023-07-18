@@ -2,7 +2,7 @@
 
 Securely encrypt and decrypt files with PhoenixVault, a file encryption and decryption application built with Node.js and Express. Safeguard your sensitive files using AES-256 encryption algorithm. Upload encrypted files to the server and effortlessly decrypt them when needed. Enjoy a user-friendly web interface for easy file management.
 
-![PhoenixVault Logo](logo.png)
+![PhoenixVault Logo](logo.gif)
 
 ## Features
 
