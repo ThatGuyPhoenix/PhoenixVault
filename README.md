@@ -21,7 +21,7 @@ Securely encrypt and decrypt files with PhoenixVault, a file encryption and decr
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/phoenix-vault.git
+   git clone https://github.com/ThatGuyPhoenix/PhoenixVault.git
    
 2. Install the dependencies:
 
