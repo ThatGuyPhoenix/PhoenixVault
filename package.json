@@ -1,0 +1,25 @@
+{
+  "name": "phoenix-vault",
+  "version": "1.0.0",
+  "description": "PhoenixVault is a file encryption and decryption application built with Node.js and Express. It provides a secure way to encrypt files using AES-256 encryption algorithm. Encrypted files can be uploaded to the server, and users can later decrypt them using a provided encryption key.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "multer": "^1.4.3"
+  },
+  "keywords": [
+    "file encryption",
+    "file decryption",
+    "AES-256",
+    "Node.js",
+    "Express",
+    "multer",
+    "crypto"
+  ],
+  "author": "Cort Phoenix",
+  "license": "MIT"
+}

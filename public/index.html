@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PhoenixVault</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .upload-form {
+            margin-bottom: 1.5rem;
+        }
+
+        .password-input {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #555;
+        }
+    </style>
+<body>
+    <div class="container">
+        <h1 class="logo">PhoenixVault</h1>
+
+        <form class="upload-form" id="uploadForm" action="http://localhost:8080/api/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileInput">
+            <button class="submit-button" type="submit">Upload</button>
+        </form>
+
+        <h2>Decryption</h2>
+        <input class="password-input" type="password" id="passwordInput" placeholder="Enter decryption password">
+        <button class="submit-button" onclick="decryptFile()">Decrypt</button>
+    </div>
+
+
+    <script>
+        function decryptFile() {
+            const passwordInput = document.getElementById("passwordInput");
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+            const formData = new FormData();
+
+            if (!file) {
+                alert("Please select a file to decrypt.");
+                return;
+            }
+
+            if (!passwordInput.value) {
+                alert("Please enter the decryption password.");
+                return;
+            }
+
+            formData.append("file", file);
+            formData.append("key", passwordInput.value);
+
+            fetch("http://localhost:8080/api/decrypt", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob();
+                } else {
+                    throw new Error("Failed to decrypt file.");
+                }
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = file.name.replace("_encrypted", "_decrypted");
+                link.click();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Failed to decrypt file. Please try again.");
+            });
+        }
+    </script>
+</body>
+</html>
